@@ -26,18 +26,15 @@ export default new Vuex.Store({
       { label: "занятости", value: [] },
       { label: "график", value: [] },
     ],
-    briefcases: [] as object[],
-    // as {
-    //   id: number;
-    //   body: string;
-    //   username: string;
-    // }[],
+    briefcase: [] as {
+      id: number;
+    }[],
   },
   getters: {
     formdata: (state) => state.formdata,
     files: (state) => state.files,
     selects: (state) => state.selects,
-    briefcases: (state) => state.briefcases,
+    briefcase: (state) => state.briefcase,
   },
   mutations: {
     updateForm: function (state, { value, name }) {
@@ -53,17 +50,23 @@ export default new Vuex.Store({
       const index = state.selects.findIndex((d) => d.label === name);
       state.selects[index].value = str;
     },
-    addBriefcases: function (state, briefcase) {
-      state.briefcases.push(briefcase);
+    addBriefcases: function (state, { item, name }) {
+      state.[name].push(item);
     },
+    // deleteBriefcases: function (state, { item, name }) {
+    //   // state[type]
+    //   state.briefcases = state.briefcases.filter((d) => d.id !== id);
+    // },
   },
   actions: {
     updateForm({ commit }, { value, name }) {
       commit("updateForm", { value, name });
     },
-    addBriefcases({ commit }, briefcase) {
-      commit("addBriefcases", briefcase);
-      console.log(briefcase);
+    addBriefcases({ commit }, { item, name }) {
+      commit("addBriefcases", { item, name });
+    },
+    deleteBriefcases({ commit }, { item, name }) {
+      commit("deleteBriefcases", { item, name });
     },
     updateSelects({ commit }, { str, name }) {
       commit("updateSelects", { str, name });

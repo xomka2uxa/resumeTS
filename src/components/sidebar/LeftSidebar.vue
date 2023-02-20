@@ -96,62 +96,66 @@ export default {
         title: "Опыт работы",
         isAddible: true,
         buttonText: "Добавить место работы",
+        editButtonText: "Редактировать место работы",
         list: [
-          [
-            {
-              name: "название компании",
-              label: "название компании*",
-              type: "text",
-              value: "",
-              isRequired: true,
-            },
-            {
-              name: "сайт компании",
-              label: "сайт компании",
-              type: "text",
-              value: "",
-              isRequired: false,
-            },
-            {
-              name: "сфера деятельности",
-              label: "сфера деятельности",
-              type: "text",
-              value: "",
-              isRequired: false,
-            },
-            {
-              name: "должность",
-              label: "должность*",
-              type: "text",
-              value: "",
-              isRequired: true,
-            },
-            {
-              name: "дата начала",
-              label: "дата начала*",
-              modal: false,
-              isRequired: true,
-              type: "date",
-              // value: new Date().toISOString().substr(0, 7),
-              value: "",
-            },
-            {
-              name: "дата окончания",
-              label: "дата окончания*",
-              modal: false,
-              isRequired: true,
-              type: "date",
-              // value: new Date().toISOString().substr(0, 7),
-              value: "",
-            },
-            {
-              name: "свободная форма",
-              label: "свободная форма",
-              type: "textarea",
-              value: "",
-              isRequired: false,
-            },
-          ],
+          {
+            id: 0,
+            fields: [
+              {
+                name: "название компании",
+                label: "название компании*",
+                type: "text",
+                value: "",
+                isRequired: true,
+              },
+              {
+                name: "сайт компании",
+                label: "сайт компании",
+                type: "text",
+                value: "",
+                isRequired: false,
+              },
+              {
+                name: "сфера деятельности",
+                label: "сфера деятельности",
+                type: "text",
+                value: "",
+                isRequired: false,
+              },
+              {
+                name: "должность",
+                label: "должность*",
+                type: "text",
+                value: "",
+                isRequired: true,
+              },
+              {
+                name: "дата начала",
+                label: "дата начала*",
+                modal: false,
+                isRequired: true,
+                type: "date",
+                // value: new Date().toISOString().substr(0, 7),
+                value: "",
+              },
+              {
+                name: "дата окончания",
+                label: "дата окончания*",
+                modal: false,
+                isRequired: true,
+                type: "date",
+                // value: new Date().toISOString().substr(0, 7),
+                value: "",
+              },
+              {
+                name: "свободная форма",
+                label: "свободная форма",
+                type: "textarea",
+                value: "",
+                isRequired: false,
+              },
+            ],
+          },
         ],
         i: 0,
         fields: [
@@ -322,11 +326,21 @@ export default {
     },
   },
   methods: {
-    scrollBlock(block) {
-      this.isSidebarMain = true;
+    scroll(block) {
       document.getElementById(block).scrollIntoView({
         behavior: "smooth",
       });
+      console.log(2);
+    },
+    scrollBlock(block) {
+      if (!this.isSidebarMain) {
+        this.isSidebarMain = true;
+        setTimeout(this.scroll, 100, block);
+      } else {
+        document.getElementById(block).scrollIntoView({
+          behavior: "smooth",
+        });
+      }
     },
     addList(name) {
       let icon = this.icons.find((item) => item.name == name);
@@ -386,7 +400,8 @@ export default {
         },
       ];
       icon.i = icon.i + 1;
-      icon.list.push(fields);
+      let idValue = icon.i;
+      icon.list.push({ id: idValue, fields: fields });
     },
   },
 };

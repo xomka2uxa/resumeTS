@@ -7,8 +7,8 @@
         {{ briefcases }}
         <!-- {{ formdata }}
         {{ selects }}
-        {{ files }} -->
-        <!-- <div v-if="!files[0].isSet">feteter</div>
+        {{ files }}
+        <div v-if="!files[0].isSet">feteter</div>
         <div v-else>
           нуж6о
           <img :src="files[0].value" width="100" />

@@ -4,13 +4,7 @@
       <sidebar-block-app
         v-for="icon in icons"
         :key="icon.name"
-        :name="icon.name"
-        :title="icon.title"
-        :fields="icon.fields"
-        :isAddible="icon.isAddible"
-        :buttonText="icon.buttonText"
-        :list="icon.list"
-        :i="icon.i"
+        :icon="icon"
         @addList="addList(icon.name)"
       />
     </div>
