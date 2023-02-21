@@ -26,7 +26,10 @@ export default new Vuex.Store({
       { label: "занятости", value: [] },
       { label: "график", value: [] },
     ],
-    briefcase: [] as {
+    briefcases: [] as {
+      id: number;
+    }[],
+    schools: [] as {
       id: number;
     }[],
   },
@@ -34,7 +37,8 @@ export default new Vuex.Store({
     formdata: (state) => state.formdata,
     files: (state) => state.files,
     selects: (state) => state.selects,
-    briefcase: (state) => state.briefcase,
+    briefcases: (state) => state.briefcases,
+    schools: (state) => state.schools,
   },
   mutations: {
     updateForm: function (state, { value, name }) {
@@ -50,23 +54,35 @@ export default new Vuex.Store({
       const index = state.selects.findIndex((d) => d.label === name);
       state.selects[index].value = str;
     },
-    addBriefcases: function (state, { item, name }) {
-      state.[name].push(item);
+    addBriefcases: function (state, item) {
+      state.briefcases.push(item);
     },
-    // deleteBriefcases: function (state, { item, name }) {
-    //   // state[type]
-    //   state.briefcases = state.briefcases.filter((d) => d.id !== id);
-    // },
+    deleteBriefcases: function (state, item) {
+      // state[type]
+      state.briefcases = state.briefcases.filter((d) => d.id !== item);
+    },
+    addSchools: function (state, item) {
+      state.schools.push(item);
+    },
+    deleteSchools: function (state, item) {
+      state.schools = state.schools.filter((d) => d.id !== item);
+    },
   },
   actions: {
     updateForm({ commit }, { value, name }) {
       commit("updateForm", { value, name });
     },
-    addBriefcases({ commit }, { item, name }) {
-      commit("addBriefcases", { item, name });
+    addBriefcases({ commit }, item) {
+      commit("addBriefcases", item);
     },
-    deleteBriefcases({ commit }, { item, name }) {
-      commit("deleteBriefcases", { item, name });
+    deleteBriefcases({ commit }, item) {
+      commit("deleteBriefcases", item);
+    },
+    addSchools({ commit }, item) {
+      commit("addSchools", item);
+    },
+    deleteSchools({ commit }, item) {
+      commit("deleteSchools", item);
     },
     updateSelects({ commit }, { str, name }) {
       commit("updateSelects", { str, name });

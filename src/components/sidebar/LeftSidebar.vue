@@ -93,71 +93,72 @@ export default {
       },
       {
         name: "briefcase",
+        nameList: "briefcases",
         title: "Опыт работы",
         isAddible: true,
         buttonText: "Добавить место работы",
         editButtonText: "Редактировать место работы",
         list: [
-          {
-            id: 0,
-            fields: [
-              {
-                name: "название компании",
-                label: "название компании*",
-                type: "text",
-                value: "",
-                isRequired: true,
-              },
-              {
-                name: "сайт компании",
-                label: "сайт компании",
-                type: "text",
-                value: "",
-                isRequired: false,
-              },
-              {
-                name: "сфера деятельности",
-                label: "сфера деятельности",
-                type: "text",
-                value: "",
-                isRequired: false,
-              },
-              {
-                name: "должность",
-                label: "должность*",
-                type: "text",
-                value: "",
-                isRequired: true,
-              },
-              {
-                name: "дата начала",
-                label: "дата начала*",
-                modal: false,
-                isRequired: true,
-                type: "date",
-                // value: new Date().toISOString().substr(0, 7),
-                value: "",
-              },
-              {
-                name: "дата окончания",
-                label: "дата окончания*",
-                modal: false,
-                isRequired: true,
-                type: "date",
-                // value: new Date().toISOString().substr(0, 7),
-                value: "",
-              },
-              {
-                name: "свободная форма",
-                label: "свободная форма",
-                type: "textarea",
-                value: "",
-                isRequired: false,
-              },
-            ],
-          },
+          // {
+          //   id: 0,
+          //   fields: [
+          //     {
+          //       name: "название компании",
+          //       label: "название компании*",
+          //       type: "text",
+          //       value: "",
+          //       isRequired: true,
+          //     },
+          //     {
+          //       name: "сайт компании",
+          //       label: "сайт компании",
+          //       type: "text",
+          //       value: "",
+          //       isRequired: false,
+          //     },
+          //     {
+          //       name: "сфера деятельности",
+          //       label: "сфера деятельности",
+          //       type: "text",
+          //       value: "",
+          //       isRequired: false,
+          //     },
+          //     {
+          //       name: "должность",
+          //       label: "должность*",
+          //       type: "text",
+          //       value: "",
+          //       isRequired: true,
+          //     },
+          //     {
+          //       name: "дата начала",
+          //       label: "дата начала*",
+          //       modal: false,
+          //       isRequired: true,
+          //       type: "date",
+          //       // value: new Date().toISOString().substr(0, 7),
+          //       value: "",
+          //     },
+          //     {
+          //       name: "дата окончания",
+          //       label: "дата окончания*",
+          //       modal: false,
+          //       isRequired: true,
+          //       type: "date",
+          //       // value: new Date().toISOString().substr(0, 7),
+          //       value: "",
+          //     },
+          //     {
+          //       name: "свободная форма",
+          //       label: "свободная форма",
+          //       type: "textarea",
+          //       value: "",
+          //       isRequired: false,
+          //     },
+          //   ],
+          // },
         ],
-        i: 0,
+        i: -1,
         fields: [
           {
             name: "название компании",
@@ -214,19 +215,98 @@ export default {
           },
         ],
       },
-      // {
-      //   name: "school",
-      //   title: "Образование",
-      //   fields: [
-      //     "список",
-      //     "кнопка",
-      //     "название учреждения",
-      //     "дата начала",
-      //     "дата окончания",
-      //     "направление",
-      //     "свободная форма",
-      //   ],
-      // },
+      {
+        name: "school",
+        nameList: "schools",
+        title: "Образование",
+        isAddible: true,
+        buttonText: "Добавить место учебы",
+        editButtonText: "Редактировать место учебы",
+        i: 0,
+        list: [
+          {
+            id: 0,
+            fields: [
+              {
+                name: "название учреждения",
+                label: "название учреждения*",
+                type: "text",
+                value: "",
+                isRequired: true,
+              },
+              {
+                name: "направление",
+                label: "направление",
+                type: "text",
+                value: "",
+                isRequired: false,
+              },
+              {
+                name: "дата начала",
+                label: "дата начала*",
+                modal: false,
+                isRequired: true,
+                type: "date",
+                value: "",
+              },
+              {
+                name: "дата окончания",
+                label: "дата окончания*",
+                modal: false,
+                isRequired: true,
+                type: "date",
+                value: "",
+              },
+              {
+                name: "свободная форма",
+                label: "свободная форма",
+                type: "textarea",
+                value: "",
+                isRequired: false,
+              },
+            ],
+          },
+        ],
+        fields: [
+          {
+            name: "название учреждения",
+            label: "название учреждения*",
+            type: "text",
+            value: "",
+            isRequired: true,
+          },
+          {
+            name: "направление",
+            label: "направление",
+            type: "text",
+            value: "",
+            isRequired: false,
+          },
+          {
+            name: "дата начала",
+            label: "дата начала*",
+            modal: false,
+            isRequired: true,
+            type: "date",
+            value: "",
+          },
+          {
+            name: "дата окончания",
+            label: "дата окончания*",
+            modal: false,
+            isRequired: true,
+            type: "date",
+            value: "",
+          },
+          {
+            name: "свободная форма",
+            label: "свободная форма",
+            type: "textarea",
+            value: "",
+            isRequired: false,
+          },
+        ],
+      },
       // {
       //   name: "certificate",
       //   title: "Курсы",
@@ -344,7 +424,8 @@ export default {
     },
     addList(name) {
       let icon = this.icons.find((item) => item.name == name);
-      let fields = [
+      icon.i = icon.i + 1;
+      let briefFields = [
         {
           name: "название компании",
           label: "название компании*",
@@ -399,9 +480,52 @@ export default {
           isRequired: false,
         },
       ];
-      icon.i = icon.i + 1;
-      let idValue = icon.i;
-      icon.list.push({ id: idValue, fields: fields });
+      let educationFields = [
+        {
+          name: "название учреждения",
+          label: "название учреждения*",
+          type: "text",
+          value: "",
+          isRequired: true,
+        },
+        {
+          name: "направление",
+          label: "направление",
+          type: "text",
+          value: "",
+          isRequired: false,
+        },
+        {
+          name: "дата начала",
+          label: "дата начала*",
+          modal: false,
+          isRequired: true,
+          type: "date",
+          value: "",
+        },
+        {
+          name: "дата окончания",
+          label: "дата окончания*",
+          modal: false,
+          isRequired: true,
+          type: "date",
+          value: "",
+        },
+        {
+          name: "свободная форма",
+          label: "свободная форма",
+          type: "textarea",
+          value: "",
+          isRequired: false,
+        },
+      ];
+      if (icon.isAddible) {
+        if (name == "briefcase") {
+          icon.list.push({ id: icon.i, fields: briefFields });
+        } else if (name == "school") {
+          icon.list.push({ id: icon.i, fields: educationFields });
+        }
+      }
     },
   },
 };

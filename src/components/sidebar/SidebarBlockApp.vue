@@ -7,18 +7,20 @@
     <left-block-content v-if="!icon.isAddible" :fields="icon.fields" />
     <v-row v-else>
       <v-col cols="12">
-        <div v-if="!briefcases.length" class="empty-list">Ваш список пуст</div>
+        <div v-if="!storeList.length" class="empty-list">Ваш список пуст</div>
         <left-edit-block-content
-          :name="icon.name"
+          v-else
+          :name="icon.nameList"
           :list="icon.list"
           :edit="true"
-          :i="icon.i"
+          :storeList="storeList"
           :text="icon.editButtonText"
           @addList="AddList"
         />
       </v-col>
       <v-col cols="12">
         <left-edit-block-content
+          :name="icon.nameList"
           :list="icon.list"
           :edit="false"
           :i="icon.i"
@@ -50,7 +52,16 @@ export default {
   },
   emits: ["addList"],
   computed: {
-    ...mapGetters(["briefcases"]),
+    ...mapGetters(["briefcases", "schools"]),
+    storeList() {
+      let value = [];
+      if (this.icon.name == "briefcase") {
+        value = this.briefcases;
+      } else if (this.icon.name == "school") {
+        value = this.schools;
+      }
+      return value;
+    },
   },
   methods: {
     AddList() {

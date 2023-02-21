@@ -109,7 +109,7 @@
         </v-card>
       </v-dialog>
     </div>
-    <div v-else v-for="(briefcase, i) in briefcases" :key="i">
+    <div v-else v-for="(list, i) in storeList" :key="i">
       <v-dialog
         scrollable
         v-model="dialogEdit"
@@ -123,8 +123,8 @@
             class="btn-add item-name"
             v-bind="attrs"
             v-on="on"
-            @click="dialogEdit = true"
-            >{{ briefcases[i].fields[0].value }}</v-btn
+            @click="editOpen(list)"
+            >{{ list.fields[0].value }}</v-btn
           >
         </template>
         <v-card>
@@ -220,7 +220,7 @@
             <v-btn color="primary" text @click="dialogEdit = false">
               Сохранить
             </v-btn>
-            <v-btn color="primary" text @click="deleteBrief(briefcase.id)">
+            <v-btn color="primary" text @click="deleteBrief(storeList[i].id)">
               Удалить
             </v-btn>
           </v-card-actions>
@@ -231,7 +231,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: {
@@ -252,49 +252,82 @@ export default {
     },
     i: {
       type: Number,
-      required: true,
+    },
+    storeList: {
+      type: Array,
     },
   },
   data: () => ({
     dialog: false,
     dialogEdit: false,
+    id: "",
+    textFields: [],
+    fileFields: [],
+    textAreaFields: [],
+    dateFields: [],
+    multiSelectFields: [],
+    selectFields: [],
   }),
   emits: ["addList"],
-  computed: {
-    ...mapGetters(["briefcases"]),
-    textFields() {
-      return this.list[this.i].fields.filter((item) => item.type == "text");
-    },
-    fileFields() {
-      return this.list[this.i].fields.filter((item) => item.type == "file");
-    },
-    textAreaFields() {
-      return this.list[this.i].fields.filter((item) => item.type == "textarea");
-    },
-    dateFields() {
-      return this.list[this.i].fields.filter((item) => item.type == "date");
-    },
-    multiSelectFields() {
-      return this.list[this.i].fields.filter(
-        (item) => item.type == "multiselect"
-      );
-    },
-    selectFields() {
-      return this.list[this.i].fields.filter((item) => item.type == "select");
-    },
-  },
   methods: {
-    ...mapActions(["addBriefcases", "deleteBriefcases"]),
+    ...mapActions([
+      "addBriefcases",
+      "deleteBriefcases",
+      "deleteSchools",
+      "addSchools",
+    ]),
     AddList() {
       this.$emit("addList");
+      console.log(this.i, this.list);
+      let index = this.i + 1;
+      this.textFields = this.list[index].fields.filter(
+        (item) => item.type == "text"
+      );
+      this.fileFields = this.list[index].fields.filter(
+        (item) => item.type == "file"
+      );
+      this.textAreaFields = this.list[index].fields.filter(
+        (item) => item.type == "textarea"
+      );
+      this.dateFields = this.list[index].fields.filter(
+        (item) => item.type == "date"
+      );
+      this.multiSelectFields = this.list[index].fields.filter(
+        (item) => item.type == "multiselect"
+      );
+      this.selectFields = this.list[index].fields.filter(
+        (item) => item.type == "select"
+      );
     },
     modalClose() {
       this.dialog = false;
-      this.addBriefcases(this.list[this.i], this.name);
+      if (this.name == "briefcases") {
+        this.addBriefcases(this.list[this.i]);
+      } else if (this.name == "schools") {
+        this.addSchools(this.list[this.i]);
+      }
+    },
+    editOpen(item) {
+      this.dialogEdit = true;
+      this.textFields = item.fields.filter((item) => item.type == "text");
+      this.fileFields = item.fields.filter((item) => item.type == "file");
+      this.textAreaFields = item.fields.filter(
+        (item) => item.type == "textarea"
+      );
+      this.dateFields = item.fields.filter((item) => item.type == "date");
+      this.multiSelectFields = item.fields.filter(
+        (item) => item.type == "multiselect"
+      );
+      this.selectFields = item.fields.filter((item) => item.type == "select");
     },
     deleteBrief(id) {
+      console.log(id);
       this.dialogEdit = false;
-      this.deleteBriefcases(id, this.name);
+      if (this.name == "briefcases") {
+        this.deleteBriefcases(id);
+      } else if (this.name == "schools") {
+        this.deleteSchools(id);
+      }
     },
   },
 };
@@ -309,6 +342,7 @@ export default {
 
   &.item-name {
     margin-top: 0;
+    margin-bottom: 15px;
     width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.24) !important;
     padding: 12px;
