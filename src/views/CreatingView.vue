@@ -1,8 +1,11 @@
 <template>
   <div class="main main--creating-resume">
     <div class="inner">
-      <left-sidebar />
-      <div class="main"></div>
+      <!-- <left-sidebar /> -->
+      <div class="left-sidebar">
+        <left-sidebar />
+      </div>
+      <div class="main">yuyuty</div>
       <div class="right-sidebar">
         {{ briefcases }}
         <!-- {{ formdata }}
@@ -20,7 +23,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import LeftSidebar from "@/components/sidebar/LeftSidebar.vue";
+import LeftSidebar from "@/components/leftSidebar/SidebarLeftApp.vue";
 export default {
   components: {
     LeftSidebar,
@@ -49,10 +52,19 @@ export default {
       overflow: hidden;
       z-index: 2;
     }
+    .left-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 30%;
+    }
 
     .main {
-      background-color: #fbf9f7;
+      background-color: #482d11;
       width: 40%;
+      position: fixed;
+      top: 0;
+      left: 30%;
       height: 100%;
     }
   }

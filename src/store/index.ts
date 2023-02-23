@@ -32,6 +32,9 @@ export default new Vuex.Store({
     schools: [] as {
       id: number;
     }[],
+    courses: [] as {
+      id: number;
+    }[],
   },
   getters: {
     formdata: (state) => state.formdata,
@@ -39,6 +42,7 @@ export default new Vuex.Store({
     selects: (state) => state.selects,
     briefcases: (state) => state.briefcases,
     schools: (state) => state.schools,
+    courses: (state) => state.courses,
   },
   mutations: {
     updateForm: function (state, { value, name }) {
@@ -67,6 +71,12 @@ export default new Vuex.Store({
     deleteSchools: function (state, item) {
       state.schools = state.schools.filter((d) => d.id !== item);
     },
+    addCourses: function (state, item) {
+      state.courses.push(item);
+    },
+    deleteCourses: function (state, item) {
+      state.schools = state.courses.filter((d) => d.id !== item);
+    },
   },
   actions: {
     updateForm({ commit }, { value, name }) {
@@ -83,6 +93,12 @@ export default new Vuex.Store({
     },
     deleteSchools({ commit }, item) {
       commit("deleteSchools", item);
+    },
+    addCourses({ commit }, item) {
+      commit("addCourses", item);
+    },
+    deleteCourses({ commit }, item) {
+      commit("deleteCourses", item);
     },
     updateSelects({ commit }, { str, name }) {
       commit("updateSelects", { str, name });

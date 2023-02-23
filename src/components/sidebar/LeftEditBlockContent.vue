@@ -85,6 +85,18 @@
                     </v-date-picker>
                   </v-dialog>
                 </v-col>
+                <v-col cols="12" v-for="field in fileFields" :key="field.name">
+                  {{ field.name }}
+                  <v-file-input
+                    label="Выберите файл"
+                    placeholder="Ваш файл"
+                    v-model="field.value"
+                    prepend-icon=""
+                    ref="file"
+                    outlined
+                    @change="setFile(field.value, field.name)"
+                  ></v-file-input>
+                </v-col>
                 <v-col
                   cols="12"
                   v-for="field in textAreaFields"
@@ -267,6 +279,10 @@ export default {
     dateFields: [],
     multiSelectFields: [],
     selectFields: [],
+    src: {
+      url: "",
+      name: "",
+    },
   }),
   emits: ["addList"],
   methods: {
@@ -275,6 +291,8 @@ export default {
       "deleteBriefcases",
       "deleteSchools",
       "addSchools",
+      "deleteCourses",
+      "addCourses",
     ]),
     AddList() {
       this.$emit("addList");
@@ -305,6 +323,8 @@ export default {
         this.addBriefcases(this.list[this.i]);
       } else if (this.name == "schools") {
         this.addSchools(this.list[this.i]);
+      } else if (this.name == "courses") {
+        this.addCourses(this.list[this.i]);
       }
     },
     editOpen(item) {
@@ -321,15 +341,42 @@ export default {
       this.selectFields = item.fields.filter((item) => item.type == "select");
     },
     deleteBrief(id) {
-      console.log(id);
       this.dialogEdit = false;
       if (this.name == "briefcases") {
         this.deleteBriefcases(id);
       } else if (this.name == "schools") {
         this.deleteSchools(id);
+      } else if (this.name == "courses") {
+        this.deleteCourses(id);
       }
     },
+    setFile(value, name) {
+      let file = "";
+      file = value;
+      this.src.name = name;
+      let reader = new FileReader();
+      if (this.src.name) {
+        reader.addEventListener(
+          "load",
+          function () {
+            this.src.url = reader.result;
+          }.bind(this),
+          false
+        );
+      }
+      reader.readAsDataURL(file);
+    },
   },
+  // watch: {
+  //   src: {
+  //     deep: true,
+  //     handler() {
+  //       let value = this.src.url;
+  //       let name = this.src.name;
+  //       this.updateFile({ value, name });
+  //     },
+  //   },
+  // },
 };
 </script>
 
