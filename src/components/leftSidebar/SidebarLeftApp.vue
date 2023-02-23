@@ -2,12 +2,10 @@
   <div class="left-sidebar">
     <div class="left-sidebar-content">
       <left-sidebar-panel @scrollHandle="scrollBlock" :open="isSidebarMain" />
-      <!-- <sidebar-main
-        :icons="icons"
+      <left-sidebar-content
         class="sidebar-text"
         :class="{ __mobile: isSidebarMain }"
-        @addList="addList"
-      /> -->
+      />
       <div class="btn-toggle" @click="isSidebarMain = !isSidebarMain">
         <icon-app :name="nameIcon" :inToggle="true" />
       </div>
@@ -18,13 +16,13 @@
 
 <script>
 import LeftSidebarPanel from "@/components/leftSidebar/LeftSidebarPanel.vue";
-// import SidebarMain from "@/components/sidebar/SidebarMain.vue";
+import LeftSidebarContent from "@/components/leftSidebar/LeftSidebarContent.vue";
 import IconApp from "@/components/ui/IconApp.vue";
 
 export default {
   components: {
     LeftSidebarPanel,
-    // SidebarMain,
+    LeftSidebarContent,
     IconApp,
   },
   data: () => ({
@@ -257,8 +255,12 @@ export default {
     },
   },
   methods: {
+    scroll(block) {
+      document.getElementById(block).scrollIntoView({
+        behavior: "smooth",
+      });
+    },
     scrollBlock(blockId) {
-      console.log(blockId);
       if (!this.isSidebarMain) {
         this.isSidebarMain = true;
         setTimeout(this.scroll, 100, blockId);
@@ -420,6 +422,7 @@ export default {
 <style lang="scss" scoped>
 .left-sidebar {
   transition: width 0.3s ease;
+  width: 30%;
 
   @include xl-down {
     width: 100%;

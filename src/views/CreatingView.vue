@@ -52,11 +52,12 @@ export default {
       overflow: hidden;
       z-index: 2;
     }
+
     .left-sidebar {
       position: fixed;
       top: 0;
       left: 0;
-      width: 30%;
+      z-index: 4;
     }
 
     .main {
