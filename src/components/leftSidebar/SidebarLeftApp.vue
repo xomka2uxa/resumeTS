@@ -271,8 +271,8 @@ export default {
       }
     },
     close() {
-      this.isSidebarMain = false;
       console.log(5555);
+      this.isSidebarMain = false;
     },
     // addList(name) {
     //   let icon = this.icons.find((item) => item.name == name);
@@ -427,6 +427,10 @@ export default {
 .left-sidebar {
   transition: width 0.3s ease;
   width: 30%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
 
   @include xl-down {
     width: 100%;
@@ -441,6 +445,7 @@ export default {
     bottom: 0;
     background-color: transparent;
     z-index: 3;
+    cursor: pointer;
 
     @include xl-down {
       display: block;

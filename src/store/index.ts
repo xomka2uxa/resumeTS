@@ -111,8 +111,11 @@ Vue.use(Vuex);
 type TState = {
   [key: string]: string | object | [];
 };
+type TState1 = {
+  [key: string]: TState;
+};
 export default new Vuex.Store({
-  state: {
+  state: <TState1>{
     formdataMain: <TState>{
       name: "",
       age: "",
