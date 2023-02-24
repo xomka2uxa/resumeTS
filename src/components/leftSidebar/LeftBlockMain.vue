@@ -26,7 +26,7 @@
           :label="field.label"
           outlined
           v-model="field.value"
-          @input="setName(field.value, field.name)"
+          @input="setData(field.value, field.name)"
         ></v-text-field>
       </v-col>
       <v-col
@@ -53,8 +53,7 @@
           </template>
           <v-date-picker
             v-model="field.value"
-            @change="setName(field.value, field.name)"
-            type="month"
+            @change="setDataAge(field.value, field.name)"
             scrollable
             locale="ru-ru"
           >
@@ -91,7 +90,7 @@
           :label="field.label"
           v-model="field.value"
           outlined
-          @input="setName(field.value, field.name)"
+          @input="setData(field.value, field.name)"
         ></v-textarea>
       </v-col>
     </v-row>
@@ -108,18 +107,18 @@ export default {
   },
   data: () => ({
     name: "account",
+    idStore: "formdataMain",
     title: "Основное",
     form: {
       textFields: [
         { name: "name", value: "", label: "ваше имя" },
-        { name: "age", value: "", label: "возраст" },
         { name: "position", value: "", label: "должность" },
       ],
       fileFields: [{ name: "photo", value: {}, label: "ваше фото" }],
       dateFields: [
         {
           name: "birthday",
-          value: new Date().toISOString().substr(0, 7),
+          value: new Date().toISOString().substr(0, 10),
           label: "дата рождения",
         },
       ],
@@ -140,16 +139,32 @@ export default {
       textAreaFields: [{ name: "self", value: "", label: "О себе" }],
     },
     modal: false,
+    src: {
+      url: "",
+      name: "",
+    },
   }),
   methods: {
-    ...mapActions(["updateForm", "updateFile", "updateSelects"]),
-    setName(value, name) {
-      console.log(66);
-      this.updateForm({ value, name });
+    ...mapActions(["updateForm", "updateFile"]),
+    setData(value, name) {
+      this.updateForm({ value, name, id: this.idStore });
+    },
+    setDataAge(value, name) {
+      this.updateForm({ value, name, id: this.idStore });
+      let birthday = value.split("-");
+      let current = new Date().toISOString().substr(0, 10).split("-");
+      let years = current[0] - birthday[0];
+      if (
+        current[1] < birthday[1] ||
+        (current[1] == birthday[1] && current[2] < birthday[2])
+      ) {
+        years = years - 1;
+      }
+      this.updateForm({ value: years, name: "age", id: this.idStore });
     },
     setSelects(value, name) {
       let str = value.join(", ");
-      this.updateSelects({ str, name });
+      this.updateForm({ value: str, name, id: this.idStore });
     },
     setFile(value, name) {
       let file = "";
@@ -177,7 +192,7 @@ export default {
       handler() {
         let value = this.src.url;
         let name = this.src.name;
-        this.updateFile({ value, name });
+        this.updateFile({ value, name, id: this.idStore });
       },
     },
   },

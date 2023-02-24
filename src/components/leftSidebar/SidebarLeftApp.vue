@@ -10,7 +10,7 @@
         <icon-app :name="nameIcon" :inToggle="true" />
       </div>
     </div>
-    <div class="overlay" @click="isSidebarMain = false"></div>
+    <div class="overlay" @click="close"></div>
   </div>
 </template>
 
@@ -270,6 +270,10 @@ export default {
         });
       }
     },
+    close() {
+      this.isSidebarMain = false;
+      console.log(5555);
+    },
     // addList(name) {
     //   let icon = this.icons.find((item) => item.name == name);
     //   icon.i = icon.i + 1;
@@ -436,7 +440,7 @@ export default {
     right: 0;
     bottom: 0;
     background-color: transparent;
-    z-index: 1;
+    z-index: 3;
 
     @include xl-down {
       display: block;
@@ -446,7 +450,7 @@ export default {
   .left-sidebar-content {
     display: flex;
     position: relative;
-    z-index: 2;
+    z-index: 4;
     overflow: hidden;
   }
 
@@ -481,7 +485,7 @@ export default {
     justify-content: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
-    z-index: 2;
+    z-index: 4;
     background-color: #de8e22;
 
     @include xl-down {

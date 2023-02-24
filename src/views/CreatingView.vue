@@ -5,9 +5,19 @@
       <div class="left-sidebar">
         <left-sidebar />
       </div>
-      <div class="main">yuyuty</div>
+      <div class="main">
+        <div>{{ formdata.name }}</div>
+        <div>{{ formdata.age }}</div>
+        <div>{{ formdata.birthday }}</div>
+        <div>{{ formdata.position }}</div>
+        <div>{{ formdata.self }}</div>
+        <div>{{ formdata.employment }}</div>
+        <div>{{ formdata.schedule }}</div>
+        <div v-if="formdata.photo.isSet">
+          <img :src="formdata.photo.value" width="100" />
+        </div>
+      </div>
       <div class="right-sidebar">
-        {{ briefcases }}
         <!-- {{ formdata }}
         {{ selects }}
         {{ files }}
@@ -29,7 +39,7 @@ export default {
     LeftSidebar,
   },
   computed: {
-    ...mapGetters(["formdata", "files", "selects", "briefcases"]),
+    ...mapGetters(["formdata"]),
   },
 };
 </script>
@@ -57,7 +67,7 @@ export default {
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 4;
+      z-index: 2;
     }
 
     .main {

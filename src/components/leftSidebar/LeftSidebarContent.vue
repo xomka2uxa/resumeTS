@@ -2,15 +2,18 @@
   <div class="sidebar-main">
     <div class="sidebar-main--inner">
       <block-main />
+      <block-adress />
     </div>
   </div>
 </template>
 
 <script>
 import BlockMain from "@/components/leftSidebar/LeftBlockMain.vue";
+import BlockAdress from "@/components/leftSidebar/LeftBlockAdress.vue";
 export default {
   components: {
     BlockMain,
+    BlockAdress,
   },
   // emits: ["addList"],
   // methods: {

@@ -109,11 +109,11 @@ Vue.use(Vuex);
 //   modules: {},
 // });
 type TState = {
-  [key: string]: any[];
+  [key: string]: string | object | [];
 };
 export default new Vuex.Store({
-  state: <TState> {
-    formdataMain: {
+  state: {
+    formdataMain: <TState>{
       name: "",
       age: "",
       position: "",
@@ -123,21 +123,34 @@ export default new Vuex.Store({
         value: "",
         isSet: false,
       },
-      employment: [],
-      schedule: [],
+      employment: "",
+      schedule: "",
+    },
+    formdataAdress: <TState>{
+      country: "",
+      pasport: "",
+      city: "",
+      street: "",
+      remove: "",
     },
   },
   getters: {
     formdata: (state) => state.formdataMain,
   },
   mutations: {
-    updateForm: function (state, { value, name }) {
-      // state.formdata[name].text = value;
+    updateForm: function (state, { value, name, id }) {
+      state.formdataMain[name] = value;
+    },
+    updateFiles: function (state, { value, name, id }) {
+      state.formdataMain[name] = { value: value, isSet: true };
     },
   },
   actions: {
-    updateForm({ commit }, { value, name }) {
-      commit("updateForm", { value, name });
+    updateForm({ commit }, { value, name, id }) {
+      commit("updateForm", { value, name, id });
+    },
+    updateFile({ commit }, { value, name, id }) {
+      commit("updateFiles", { value, name, id });
     },
   },
   modules: {},
