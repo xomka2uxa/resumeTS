@@ -2,9 +2,7 @@
   <div class="main main--creating-resume">
     <div class="inner">
       <!-- <left-sidebar /> -->
-      <div class="left-sidebar">
-        <left-sidebar />
-      </div>
+      <left-sidebar />
       <div class="main">
         <div>{{ formdata.name }}</div>
         <div>{{ formdata.age }}</div>
@@ -63,12 +61,12 @@ export default {
       z-index: 2;
     }
 
-    .left-sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 2;
-    }
+    // .left-sidebar {
+    //   position: fixed;
+    //   top: 0;
+    //   left: 0;
+    //   z-index: 2;
+    // }
 
     .main {
       background-color: #482d11;
