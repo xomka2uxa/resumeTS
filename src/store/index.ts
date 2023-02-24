@@ -108,8 +108,11 @@ Vue.use(Vuex);
 //   },
 //   modules: {},
 // });
+type TState = {
+  [key: string]: any[];
+};
 export default new Vuex.Store({
-  state: {
+  state: <TState> {
     formdataMain: {
       name: "",
       age: "",
