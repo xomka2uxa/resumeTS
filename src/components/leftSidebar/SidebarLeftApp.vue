@@ -439,7 +439,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: transparent;
+    background-color: red;
     z-index: 3;
 
     @include xl-down {
