@@ -23,7 +23,7 @@
         :key="field.name"
       >
         <v-text-field
-          :label="field.name"
+          :label="field.label"
           outlined
           v-model="field.value"
           @input="setName(field.value, field.name)"
@@ -44,7 +44,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
               v-model="field.value"
-              :label="field.name"
+              :label="field.label"
               outlined
               readonly
               v-bind="attrs"
@@ -80,7 +80,7 @@
           outlined
           :items="field.variants"
           :menu-props="{ maxHeight: '400' }"
-          :label="field.name"
+          :label="field.label"
           multiple
           persistent-hint
           @input="setSelects(field.value, field.name)"
@@ -88,7 +88,7 @@
       </v-col>
       <v-col cols="12" v-for="field in form.textAreaFields" :key="field.name">
         <v-textarea
-          :label="field.name"
+          :label="field.label"
           v-model="field.value"
           outlined
           @input="setName(field.value, field.name)"
@@ -111,36 +111,40 @@ export default {
     title: "Основное",
     form: {
       textFields: [
-        { name: "ваше имя", value: "" },
-        { name: "возраст", value: "" },
-        { name: "должность", value: "" },
+        { name: "name", value: "", label: "ваше имя" },
+        { name: "age", value: "", label: "возраст" },
+        { name: "position", value: "", label: "должность" },
       ],
-      fileFields: [{ name: "ваше фото", value: {} }],
+      fileFields: [{ name: "photo", value: {}, label: "ваше фото" }],
       dateFields: [
         {
-          name: "дата рождения",
+          name: "birthday",
           value: new Date().toISOString().substr(0, 7),
+          label: "дата рождения",
         },
       ],
       multiSelectFields: [
         {
-          name: "занятости",
+          name: "employment",
           variants: ["gjkysq", "здесь", "тамй"],
           value: [],
+          label: "занятости",
         },
         {
-          name: "график",
+          name: "schedule",
           variants: ["eer", "полный", "неполный"],
           value: [],
+          label: "график",
         },
       ],
-      textAreaFields: [{ name: "О себе", value: "" }],
+      textAreaFields: [{ name: "self", value: "", label: "О себе" }],
     },
     modal: false,
   }),
   methods: {
     ...mapActions(["updateForm", "updateFile", "updateSelects"]),
     setName(value, name) {
+      console.log(66);
       this.updateForm({ value, name });
     },
     setSelects(value, name) {
