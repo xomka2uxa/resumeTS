@@ -13,6 +13,7 @@
               depressed
               outlined
               plain
+              @click="AddList"
               class="btn-add"
               v-bind="attrs"
               v-on="on"
@@ -29,7 +30,7 @@
               </v-btn>
             </v-toolbar>
 
-            <!-- <v-card-text>
+            <v-card-text>
               <v-container>
                 <v-row class="__addible">
                   <v-col
@@ -77,7 +78,11 @@
                         locale="ru-ru"
                       >
                         <v-spacer></v-spacer>
-                        <v-btn text color="primary" @click="field.modal = false">
+                        <v-btn
+                          text
+                          color="primary"
+                          @click="field.modal = false"
+                        >
                           Отмена
                         </v-btn>
                         <v-btn
@@ -89,18 +94,6 @@
                         </v-btn>
                       </v-date-picker>
                     </v-dialog>
-                  </v-col>
-                  <v-col cols="12" v-for="field in fileFields" :key="field.name">
-                    {{ field.name }}
-                    <v-file-input
-                      label="Выберите файл"
-                      placeholder="Ваш файл"
-                      v-model="field.value"
-                      prepend-icon=""
-                      ref="file"
-                      outlined
-                      @change="setFile(field.value, field.name)"
-                    ></v-file-input>
                   </v-col>
                   <v-col
                     cols="12"
@@ -115,15 +108,13 @@
                   </v-col>
                 </v-row>
               </v-container>
-            </v-card-text> -->
+            </v-card-text>
 
             <v-divider></v-divider>
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="modal = false">
-                Добавить
-              </v-btn>
+              <v-btn color="primary" text @click="setList"> Добавить </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -144,7 +135,7 @@
 
 <script>
 import IconApp from "@/components/ui/IconApp.vue";
-// import { mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -158,23 +149,76 @@ export default {
     editButtonText: "Редактировать место работы",
     list: [],
     modal: false,
-    // form: {
-    //   textFields: [
-    //     { name: "phone", value: "", label: "телефон" },
-    //     { name: "email", value: "", label: "почта" },
-    //     { name: "links", value: "", label: "сайт" },
-    //     { name: "wt", value: "", label: "Телеграмм" },
-    //   ],
-    //   textAreaFields: [
-    //     { name: "otherContacts", value: "", label: "др. способы связи" },
-    //   ],
-    // },
+    id: -1,
+    fields: [
+      {
+        name: "companyName",
+        value: "",
+        label: "название компании",
+        type: "text",
+      },
+      { name: "companyUrl", value: "", label: "сайт компании", type: "text" },
+      {
+        name: "companyBussiness",
+        value: "",
+        label: "сфера деятельности",
+        type: "text",
+      },
+      { name: "position", value: "", label: "должность", type: "text" },
+      {
+        name: "dateStart",
+        value: "",
+        label: "дата начала",
+        modal: false,
+        type: "date",
+      },
+      {
+        name: "dateFinish",
+        value: "",
+        label: "дата окончания",
+        modal: false,
+        type: "date",
+      },
+      {
+        name: "briefcaseFree",
+        value: "",
+        label: "Свободная форма",
+        type: "textarea",
+      },
+    ],
   }),
+  computed: {
+    textFields() {
+      return this.fields.filter((item) => item.type == "text");
+    },
+    textAreaFields() {
+      return this.fields.filter((item) => item.type == "textarea");
+    },
+    dateFields() {
+      return this.fields.filter((item) => item.type == "date");
+    },
+  },
   methods: {
-    // ...mapActions(["updateForm"]),
-    // setData(value, name) {
-    //   this.updateForm({ value, name, id: this.idStore });
-    // },
+    ...mapActions(["updateList"]),
+    AddList() {
+      let briefFields = [
+        { name: "companyName", value: "", label: "название компании" },
+        { name: "companyUrl", value: "", label: "сайт компании" },
+        { name: "companyBussiness", value: "", label: "сфера деятельности" },
+        { name: "position", value: "", label: "должность" },
+        { name: "dateStart", value: "", label: "дата начала" },
+        { name: "dateFinish", value: "", label: "дата окончания" },
+        { name: "briefcaseFree", value: "", label: "Свободная форма" },
+      ];
+      this.id++;
+      this.list.push({ id: this.id, fields: briefFields });
+    },
+    setList() {
+      this.modal = false;
+      this.list[this.id].fields = this.fields;
+      this.updateList({ list: this.list[this.id], id: this.idStore });
+      this.fields.map((item) => (item.value = ""));
+    },
   },
 };
 </script>

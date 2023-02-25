@@ -143,11 +143,13 @@ export default new Vuex.Store({
       wt: "",
       otherContacts: "",
     },
+    formdataBriefcases: <TState>(<unknown>[]),
   },
   getters: {
     formdataMain: (state) => state.formdataMain,
     formdataAdress: (state) => state.formdataAdress,
     formdataContacts: (state) => state.formdataContacts,
+    formdataBriefcases: (state) => state.formdataBriefcases,
   },
   mutations: {
     updateForm: function (state, { value, name, id }) {
@@ -156,6 +158,9 @@ export default new Vuex.Store({
     updateFiles: function (state, { value, name, id }) {
       state[id][name] = { value: value, isSet: true };
     },
+    updateList: function (state, { list, id }) {
+      // state[id].push(list);
+    },
   },
   actions: {
     updateForm({ commit }, { value, name, id }) {
@@ -163,6 +168,10 @@ export default new Vuex.Store({
     },
     updateFile({ commit }, { value, name, id }) {
       commit("updateFiles", { value, name, id });
+    },
+    updateList({ commit }, { list, id }) {
+      commit("updateList", { list, id });
+      console.log(list, id);
     },
   },
   modules: {},
