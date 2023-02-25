@@ -3,7 +3,8 @@
     <div class="block-title">
       <icon-app :name="name" isWhite />
       {{ title }}
-      {{ list }}
+      {{ list.length }}
+      {{ id }}
     </div>
     <v-row>
       <v-col cols="12">
@@ -325,7 +326,6 @@ export default {
       this.dateFields = this.list[this.id].fields.filter(
         (item) => item.type == "date"
       );
-      console.log(this.id);
     },
     setList() {
       this.modal = false;
@@ -346,6 +346,7 @@ export default {
     deleteList(id) {
       this.modalEdit = false;
       this.list = this.list.filter((item) => item.id != id);
+      this.id--;
       this.deleteListStore({ list: this.list, idBlock: this.idStore });
     },
   },
