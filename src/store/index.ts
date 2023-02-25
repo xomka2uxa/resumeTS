@@ -143,7 +143,7 @@ export default new Vuex.Store({
       wt: "",
       otherContacts: "",
     },
-    formdataBriefcases: <TState>(<unknown>[]),
+    formdataBriefcases: <TState>[],
   },
   getters: {
     formdataMain: (state) => state.formdataMain,
@@ -159,7 +159,7 @@ export default new Vuex.Store({
       state[id][name] = { value: value, isSet: true };
     },
     updateList: function (state, { list, id }) {
-      // state[id].push(list);
+      state[id].push(list);
     },
   },
   actions: {
