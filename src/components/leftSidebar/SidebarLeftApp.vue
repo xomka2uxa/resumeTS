@@ -443,7 +443,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: red;
+    background-color: transparent;
     z-index: 3;
     cursor: pointer;
 
@@ -457,6 +457,14 @@ export default {
     position: relative;
     z-index: 4;
     overflow: hidden;
+
+    @include xl-down {
+      width: 45%;
+    }
+
+    @include sm-down {
+      width: calc(75% - 44px);
+    }
   }
 
   .sidebar-text {
@@ -466,15 +474,7 @@ export default {
 
     &.__mobile {
       display: block;
-      // width: 50%;
-
-      @include xl-down {
-        width: 45%;
-      }
-
-      @include sm-down {
-        width: 75%;
-      }
+      flex-grow: 1;
     }
   }
 

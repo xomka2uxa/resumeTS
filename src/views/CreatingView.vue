@@ -1,30 +1,30 @@
 <template>
   <div class="main main--creating-resume">
     <div class="inner">
-      <!-- <left-sidebar /> -->
       <left-sidebar />
       <div class="main">
-        <div>{{ formdata.name }}</div>
-        <div>{{ formdata.age }}</div>
-        <div>{{ formdata.birthday }}</div>
-        <div>{{ formdata.position }}</div>
-        <div>{{ formdata.self }}</div>
-        <div>{{ formdata.employment }}</div>
-        <div>{{ formdata.schedule }}</div>
-        <div v-if="formdata.photo.isSet">
-          <img :src="formdata.photo.value" width="100" />
+        <div>{{ formdataMain.name }}</div>
+        <div>{{ formdataMain.age }}</div>
+        <div>{{ formdataMain.birthday }}</div>
+        <div>{{ formdataMain.position }}</div>
+        <div>{{ formdataMain.self }}</div>
+        <div>{{ formdataMain.employment }}</div>
+        <div>{{ formdataMain.schedule }}</div>
+        <div v-if="formdataMain.photo.isSet">
+          <img :src="formdataMain.photo.value" width="100" />
         </div>
+        <div>{{ formdataAdress.country }}</div>
+        <div>{{ formdataAdress.pasport }}</div>
+        <div>{{ formdataAdress.city }}</div>
+        <div>{{ formdataAdress.street }}</div>
+        <div>{{ formdataAdress.remove }}</div>
+        <div>{{ formdataContacts.phone }}</div>
+        <div>{{ formdataContacts.email }}</div>
+        <div>{{ formdataContacts.links }}</div>
+        <div>{{ formdataContacts.wt }}</div>
+        <div>{{ formdataContacts.otherContacts }}</div>
       </div>
-      <div class="right-sidebar">
-        <!-- {{ formdata }}
-        {{ selects }}
-        {{ files }}
-        <div v-if="!files[0].isSet">feteter</div>
-        <div v-else>
-          нуж6о
-          <img :src="files[0].value" width="100" />
-        </div> -->
-      </div>
+      <div class="right-sidebar">trr</div>
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
     LeftSidebar,
   },
   computed: {
-    ...mapGetters(["formdata"]),
+    ...mapGetters(["formdataMain", "formdataAdress", "formdataContacts"]),
   },
 };
 </script>
@@ -60,13 +60,6 @@ export default {
       overflow: hidden;
       z-index: 2;
     }
-
-    // .left-sidebar {
-    //   position: fixed;
-    //   top: 0;
-    //   left: 0;
-    //   z-index: 2;
-    // }
 
     .main {
       background-color: #482d11;

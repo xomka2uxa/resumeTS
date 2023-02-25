@@ -1,5 +1,5 @@
 <template>
-  <div class="block-content" id="ls-adress">
+  <div class="block-content" id="ls-contacts">
     <div class="block-title">
       <icon-app :name="name" isWhite />
       {{ title }}
@@ -18,16 +18,13 @@
           @input="setData(field.value, field.name)"
         ></v-text-field>
       </v-col>
-      <v-col cols="12" v-for="field in form.selectFields" :key="field.name">
-        <v-select
+      <v-col cols="12" v-for="field in form.textAreaFields" :key="field.name">
+        <v-textarea
+          :label="field.label"
           v-model="field.value"
           outlined
-          :items="field.variants"
-          :menu-props="{ maxHeight: '400' }"
-          :label="field.label"
-          persistent-hint
           @input="setData(field.value, field.name)"
-        ></v-select>
+        ></v-textarea>
       </v-col>
     </v-row>
   </div>
@@ -42,23 +39,18 @@ export default {
     IconApp,
   },
   data: () => ({
-    name: "map",
-    idStore: "formdataAdress",
-    title: "Местоположение",
+    name: "phone",
+    idStore: "formdataContacts",
+    title: "Способы связи",
     form: {
       textFields: [
-        { name: "country", value: "", label: "страна" },
-        { name: "pasport", value: "", label: "гражданство" },
-        { name: "city", value: "", label: "город" },
-        { name: "street", value: "", label: "улица и дом" },
+        { name: "phone", value: "", label: "телефон" },
+        { name: "email", value: "", label: "почта" },
+        { name: "links", value: "", label: "сайт" },
+        { name: "wt", value: "", label: "Телеграмм" },
       ],
-      selectFields: [
-        {
-          name: "remove",
-          variants: ["готов", "не готов", "готов к командировкам"],
-          value: "",
-          label: "готовность к переезду",
-        },
+      textAreaFields: [
+        { name: "otherContacts", value: "", label: "др. способы связи" },
       ],
     },
   }),

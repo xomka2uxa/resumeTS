@@ -3,6 +3,8 @@
     <div class="sidebar-main--inner">
       <block-main />
       <block-adress />
+      <block-contacts />
+      <block-briefcases />
     </div>
   </div>
 </template>
@@ -10,10 +12,14 @@
 <script>
 import BlockMain from "@/components/leftSidebar/LeftBlockMain.vue";
 import BlockAdress from "@/components/leftSidebar/LeftBlockAdress.vue";
+import BlockBriefcases from "@/components/leftSidebar/LeftBlockBriefcases.vue";
+import BlockContacts from "@/components/leftSidebar/LeftBlockContacts.vue";
 export default {
   components: {
     BlockMain,
     BlockAdress,
+    BlockContacts,
+    BlockBriefcases,
   },
   // emits: ["addList"],
   // methods: {

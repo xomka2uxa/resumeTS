@@ -18,7 +18,7 @@
       </v-col>
       <v-col
         cols="12"
-        sm="6"
+        md="6"
         v-for="field in form.textFields"
         :key="field.name"
       >
@@ -31,7 +31,7 @@
       </v-col>
       <v-col
         cols="12"
-        sm="6"
+        md="6"
         v-for="(field, index) in form.dateFields"
         :key="field.name"
       >
@@ -199,28 +199,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.block-content {
-  padding: 0 25px;
-}
-.block-title {
-  min-height: 77.22px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-family: Roboto Condensed, Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 300;
-  padding: 10px 0;
-}
-.empty-list {
-  border-radius: 0.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  padding: 12px;
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.7);
-}
-</style>
+<style lang="scss" scoped></style>

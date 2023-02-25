@@ -136,16 +136,25 @@ export default new Vuex.Store({
       street: "",
       remove: "",
     },
+    formdataContacts: <TState>{
+      phone: "",
+      email: "",
+      links: "",
+      wt: "",
+      otherContacts: "",
+    },
   },
   getters: {
-    formdata: (state) => state.formdataMain,
+    formdataMain: (state) => state.formdataMain,
+    formdataAdress: (state) => state.formdataAdress,
+    formdataContacts: (state) => state.formdataContacts,
   },
   mutations: {
     updateForm: function (state, { value, name, id }) {
-      state.formdataMain[name] = value;
+      state[id][name] = value;
     },
     updateFiles: function (state, { value, name, id }) {
-      state.formdataMain[name] = { value: value, isSet: true };
+      state[id][name] = { value: value, isSet: true };
     },
   },
   actions: {
