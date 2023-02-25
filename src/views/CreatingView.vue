@@ -23,6 +23,11 @@
         <div>{{ formdataContacts.links }}</div>
         <div>{{ formdataContacts.wt }}</div>
         <div>{{ formdataContacts.otherContacts }}</div>
+        <div v-if="formdataBriefcases.length">
+          <div v-for="(Briefcases, i) in formdataBriefcases" :key="i">
+            {{ Briefcases.fields[0].value }}
+          </div>
+        </div>
       </div>
       <div class="right-sidebar">trr</div>
     </div>
@@ -37,7 +42,12 @@ export default {
     LeftSidebar,
   },
   computed: {
-    ...mapGetters(["formdataMain", "formdataAdress", "formdataContacts"]),
+    ...mapGetters([
+      "formdataMain",
+      "formdataAdress",
+      "formdataContacts",
+      "formdataBriefcases",
+    ]),
   },
 };
 </script>

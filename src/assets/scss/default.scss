@@ -252,18 +252,24 @@ a {
   font-weight: 400 !important;
   font-size: 12px !important;
 
-  // &.item-name {
-  //   margin-top: 0;
-  //   margin-bottom: 15px;
-  //   width: 100%;
-  //   border: 1px solid rgba(255, 255, 255, 0.24) !important;
-  //   padding: 12px;
-  //   display: flex;
-  //   color: #fff;
+  &.item-name {
+    margin-top: 0;
+    margin-bottom: 15px;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.24) !important;
+    padding: 12px;
+    display: flex;
+    color: #fff;
 
-  //   .v-btn__content {
-  //     align-items: right;
-  //     opacity: 1;
-  //   }
-  // }
+    .v-btn__content {
+      align-items: right;
+      opacity: 1;
+    }
+  }
+}
+
+.list-wrapper:last-child {
+  .btn-add.item-name {
+    margin-bottom: 0;
+  }
 }

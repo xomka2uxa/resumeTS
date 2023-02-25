@@ -108,15 +108,14 @@ Vue.use(Vuex);
 //   },
 //   modules: {},
 // });
-type TState = {
-  [key: string]: string | object | [];
-};
 type TState1 = {
-  [key: string]: TState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
+
 export default new Vuex.Store({
   state: <TState1>{
-    formdataMain: <TState>{
+    formdataMain: {
       name: "",
       age: "",
       position: "",
@@ -129,21 +128,21 @@ export default new Vuex.Store({
       employment: "",
       schedule: "",
     },
-    formdataAdress: <TState>{
+    formdataAdress: {
       country: "",
       pasport: "",
       city: "",
       street: "",
       remove: "",
     },
-    formdataContacts: <TState>{
+    formdataContacts: {
       phone: "",
       email: "",
       links: "",
       wt: "",
       otherContacts: "",
     },
-    formdataBriefcases: <TState>[],
+    formdataBriefcases: [],
   },
   getters: {
     formdataMain: (state) => state.formdataMain,
@@ -161,6 +160,9 @@ export default new Vuex.Store({
     updateList: function (state, { list, id }) {
       state[id].push(list);
     },
+    deleteList: function (state, { list, idBlock }) {
+      console.log(idBlock);
+    },
   },
   actions: {
     updateForm({ commit }, { value, name, id }) {
@@ -171,7 +173,10 @@ export default new Vuex.Store({
     },
     updateList({ commit }, { list, id }) {
       commit("updateList", { list, id });
-      console.log(list, id);
+    },
+    deleteList({ commit }, { list }) {
+      console.log(list);
+      // commit("deleteList", { list, idBlock });
     },
   },
   modules: {},
