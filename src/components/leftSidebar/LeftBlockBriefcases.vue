@@ -3,6 +3,7 @@
     <div class="block-title">
       <icon-app :name="name" isWhite />
       {{ title }}
+      {{ list }}
     </div>
     <v-row>
       <v-col cols="12">
@@ -275,7 +276,7 @@ export default {
     id: -1,
   }),
   methods: {
-    ...mapActions(["updateList", "deleteList"]),
+    ...mapActions(["updateList", "deleteListStore"]),
     AddList() {
       let briefFields = [
         {
@@ -292,12 +293,19 @@ export default {
           type: "text",
         },
         { name: "position", value: "", label: "должность", type: "text" },
-        { name: "dateStart", value: "", label: "дата начала", type: "date" },
+        {
+          name: "dateStart",
+          value: "",
+          label: "дата начала",
+          type: "date",
+          modal: false,
+        },
         {
           name: "dateFinish",
           value: "",
           label: "дата окончания",
           type: "date",
+          modal: false,
         },
         {
           name: "briefcaseFree",
@@ -317,6 +325,7 @@ export default {
       this.dateFields = this.list[this.id].fields.filter(
         (item) => item.type == "date"
       );
+      console.log(this.id);
     },
     setList() {
       this.modal = false;
@@ -337,7 +346,7 @@ export default {
     deleteList(id) {
       this.modalEdit = false;
       this.list = this.list.filter((item) => item.id != id);
-      this.deleteList({ list: 45 });
+      this.deleteListStore({ list: this.list, idBlock: this.idStore });
     },
   },
 };

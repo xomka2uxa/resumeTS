@@ -161,7 +161,7 @@ export default new Vuex.Store({
       state[id].push(list);
     },
     deleteList: function (state, { list, idBlock }) {
-      console.log(idBlock);
+      state[idBlock] = list;
     },
   },
   actions: {
@@ -174,9 +174,8 @@ export default new Vuex.Store({
     updateList({ commit }, { list, id }) {
       commit("updateList", { list, id });
     },
-    deleteList({ commit }, { list }) {
-      console.log(list);
-      // commit("deleteList", { list, idBlock });
+    deleteListStore({ commit }, { list, idBlock }) {
+      commit("deleteList", { list, idBlock });
     },
   },
   modules: {},
