@@ -35,11 +35,13 @@
     <v-dialog scrollable v-model="modal" :retain-focus="false" width="500">
       <dialog-app
         :buttonText="buttonText"
-        :textFields="textFieldsForm"
-        :textAreaFields="dateFieldsForm"
-        :dateFields="textAreaFieldsForm"
+        :tFields="textFields"
+        :taFields="textAreaFields"
+        :dFields="dateFields"
         :id="id"
         @close="closeModal"
+        @edit="editList"
+        @delete="deleteList"
         @set="setList"
       />
     </v-dialog>
@@ -127,46 +129,57 @@ export default {
       this.modal = true;
     },
     setList(text, textArea, date) {
+      this.textFields = text;
+      this.textAreaFields = textArea;
+      this.dateFields = date;
       this.updateList({
         list: {
           id: this.formdataBriefcases.length + 1,
-          fields: [...text, ...textArea, ...date],
+          fields: [
+            ...this.textFields,
+            ...this.textAreaFields,
+            ...this.dateFields,
+          ],
         },
         id: this.idStore,
       });
+      this.textFields = cloneArrayObj(textFieldsForm);
+      this.textAreaFields = cloneArrayObj(textAreaFieldsForm);
+      this.dateFields = cloneArrayObj(dateFieldsForm);
       this.closeModal();
+      console.log(this.textFields, 555);
     },
 
     editOpen(item) {
       this.id = item.id;
+      this.modal = true;
       this.textFields = item.fields.filter((el) => el.type == "text");
       this.textAreaFields = item.fields.filter((el) => el.type == "textarea");
       this.dateFields = item.fields.filter((el) => el.type == "date");
-      this.modal = true;
     },
 
-    // editList(text, textArea, date) {
-    //   // this.textFields = text;
-    //   // this.textAreaFields = textArea;
-    //   // this.dateFields = date;
-    //   // this.editListStore({
-    //   //   list: {
-    //   //     id: this.formdataBriefcases.length + 1,
-    //   //     fields: [
-    //   //       ...this.textFields,
-    //   //       ...this.textAreaFields,
-    //   //       ...this.dateFields,
-    //   //     ],
-    //   //   },
-    //   //   id: this.idStore,
-    //   // });
-    //   this.closeModal();
-    // },
+    editList(text, textArea, date) {
+      this.textFields = text;
+      this.textAreaFields = textArea;
+      this.dateFields = date;
+      // this.editListStore({
+      //   list: {
+      //     id: this.formdataBriefcases.length + 1,
+      //     fields: [
+      //       ...this.textFields,
+      //       ...this.textAreaFields,
+      //       ...this.dateFields,
+      //     ],
+      //   },
+      //   id: this.idStore,
+      // });
+      this.closeModal();
+    },
 
-    // deleteList() {
-    //   this.deleteListStore({ id: this.id, idBlock: this.idStore });
-    //   this.closeModal();
-    // },
+    deleteList() {
+      this.deleteListStore({ id: this.id, idBlock: this.idStore });
+      this.closeModal();
+    },
 
     closeModal() {
       this.modal = false;

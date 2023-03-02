@@ -79,8 +79,12 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn v-if="!id" color="primary" text @click="setList"> Добавить </v-btn>
-      <v-btn v-if="id" color="primary" text> Сохранить </v-btn>
-      <v-btn v-if="id" color="primary" text> Удалить </v-btn>
+      <v-btn v-if="id" color="primary" text @click="editList">
+        Сохранить
+      </v-btn>
+      <v-btn v-if="id" color="primary" text @click="deleteList">
+        Удалить
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -99,36 +103,41 @@ export default {
     id: {
       type: Number,
     },
-    textFields: {
+    tFields: {
       type: Array,
     },
-    textAreaFields: {
+    taFields: {
       type: Array,
     },
-    dateFields: {
+    dFields: {
       type: Array,
-    },
-  },
-  computed: {
-    tFields() {
-      return cloneArrayObj(this.textFields);
     },
   },
   emits: ["close"],
+  computed: {
+    textFields() {
+      return cloneArrayObj(this.tFields);
+    },
+    textAreaFields() {
+      return cloneArrayObj(this.taFields);
+    },
+    dateFields() {
+      return cloneArrayObj(this.dFields);
+    },
+  },
   methods: {
     closeModal() {
       this.$emit("close");
     },
     setList() {
-      this.$emit("set", this.tFields, this.textAreaFields, this.dateFields);
-      this.tFields = [];
+      this.$emit("set", this.textFields, this.textAreaFields, this.dateFields);
     },
-    // editList() {
-    //   this.$emit("edit", this.textFields, this.textAreaFields, this.dateFields);
-    // },
-    // deleteList() {
-    //   this.$emit("delete");
-    // },
+    editList() {
+      this.$emit("edit", this.textFields, this.textAreaFields, this.dateFields);
+    },
+    deleteList() {
+      this.$emit("delete");
+    },
   },
 };
 </script>
