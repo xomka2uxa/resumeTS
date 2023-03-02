@@ -147,15 +147,20 @@ export default {
       this.textAreaFields = cloneArrayObj(textAreaFieldsForm);
       this.dateFields = cloneArrayObj(dateFieldsForm);
       this.closeModal();
-      console.log(this.textFields, 555);
     },
 
     editOpen(item) {
       this.id = item.id;
       this.modal = true;
-      this.textFields = item.fields.filter((el) => el.type == "text");
-      this.textAreaFields = item.fields.filter((el) => el.type == "textarea");
-      this.dateFields = item.fields.filter((el) => el.type == "date");
+      this.textFields = cloneArrayObj(
+        item.fields.filter((el) => el.type == "text")
+      );
+      this.textAreaFields = cloneArrayObj(
+        item.fields.filter((el) => el.type == "textarea")
+      );
+      this.dateFields = cloneArrayObj(
+        item.fields.filter((el) => el.type == "date")
+      );
     },
 
     editList(text, textArea, date) {

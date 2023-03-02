@@ -114,17 +114,43 @@ export default {
     },
   },
   emits: ["close"],
-  computed: {
-    textFields() {
-      return cloneArrayObj(this.tFields);
+  data() {
+    return {
+      textFields: [],
+      textAreaFields: [],
+      dateFields: [],
+    };
+  },
+
+  mounted() {
+    this.textFields = this.tFields;
+    this.textAreaFields = cloneArrayObj(this.taFields);
+    this.dateFields = cloneArrayObj(this.dFields);
+  },
+
+  watch: {
+    tFields() {
+      this.textFields = this.tFields;
+      console.log(this.tFields, 999);
     },
-    textAreaFields() {
-      return cloneArrayObj(this.taFields);
+    taFields() {
+      this.textAreaFields = cloneArrayObj(this.taFields);
     },
-    dateFields() {
-      return cloneArrayObj(this.dFields);
+    dFields() {
+      this.dateFields = cloneArrayObj(this.dFields);
     },
   },
+  // computed: {
+  //   textFields() {
+  //     return cloneArrayObj(this.tFields);
+  //   },
+  //   textAreaFields() {
+  //     return cloneArrayObj(this.taFields);
+  //   },
+  //   dateFields() {
+  //     return cloneArrayObj(this.dFields);
+  //   },
+  // },
   methods: {
     closeModal() {
       this.$emit("close");
