@@ -5,6 +5,8 @@
       <block-adress />
       <block-contacts />
       <block-briefcases />
+      <block-schools />
+      <!-- <block-courses /> -->
     </div>
   </div>
 </template>
@@ -12,21 +14,19 @@
 <script>
 import BlockMain from "@/components/leftSidebar/LeftBlockMain.vue";
 import BlockAdress from "@/components/leftSidebar/LeftBlockAdress.vue";
+import BlockSchools from "@/components/leftSidebar/LeftBlockSchools.vue";
 import BlockBriefcases from "@/components/leftSidebar/LeftBlockBriefcases.vue";
 import BlockContacts from "@/components/leftSidebar/LeftBlockContacts.vue";
+// import BlockCourses from "@/components/leftSidebar/LeftBlockCourses.vue";
 export default {
   components: {
     BlockMain,
     BlockAdress,
     BlockContacts,
     BlockBriefcases,
+    BlockSchools,
+    // BlockCourses,
   },
-  // emits: ["addList"],
-  // methods: {
-  //   addList(icon) {
-  //     this.$emit("addList", icon);
-  //   },
-  // },
 };
 </script>
 

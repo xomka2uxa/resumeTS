@@ -1,17 +1,17 @@
 <template>
-  <div class="block-content" id="ls-briefcase">
+  <div class="block-content" id="ls-schools">
     <div class="block-title">
       <icon-app :name="name" isWhite class="left-block-icon" />
       {{ title }}
     </div>
     <v-row>
       <v-col cols="12">
-        <div v-if="!formdataBriefcases.length" class="empty-list">
+        <div v-if="!formdataSchools.length" class="empty-list">
           Ваш список пуст
         </div>
         <div v-else>
           <div
-            v-for="(item, i) in formdataBriefcases"
+            v-for="(item, i) in formdataSchools"
             :key="i"
             class="list-wrapper"
           >
@@ -35,11 +35,13 @@
     <v-dialog scrollable v-model="modal" :retain-focus="false" width="500">
       <dialog-app
         :buttonText="buttonText"
-        :textFields="textFieldsForm"
-        :textAreaFields="dateFieldsForm"
-        :dateFields="textAreaFieldsForm"
+        :textFields="textFields"
+        :textAreaFields="textAreaFields"
+        :dateFields="dateFields"
         :id="id"
         @close="closeModal"
+        @edit="editList"
+        @delete="deleteList"
         @set="setList"
       />
     </v-dialog>
@@ -52,19 +54,12 @@ import DialogApp from "@/components/ui/DialogApp.vue";
 import { mapGetters, mapActions } from "vuex";
 const textFieldsForm = [
   {
-    name: "companyName",
+    name: "schoolsName",
     value: "",
-    label: "название компании",
+    label: "название учреждения*",
     type: "text",
   },
-  { name: "companyUrl", value: "", label: "сайт компании", type: "text" },
-  {
-    name: "companyBussiness",
-    value: "",
-    label: "сфера деятельности",
-    type: "text",
-  },
-  { name: "position", value: "", label: "должность", type: "text" },
+  { name: "educationPosition", value: "", label: "направление", type: "text" },
 ];
 const dateFieldsForm = [
   {
@@ -101,11 +96,11 @@ export default {
     DialogApp,
   },
   data: () => ({
-    name: "briefcase",
-    idStore: "formdataBriefcases",
-    title: "Опыт работы",
-    buttonText: "Добавить место работы",
-    editButtonText: "Редактировать место работы",
+    name: "school",
+    idStore: "formdataSchools",
+    title: "Образование",
+    buttonText: "Добавить место обучения",
+    editButtonText: "Редактировать место обучения",
     list: [],
     textFields: [],
     textAreaFields: [],
@@ -115,22 +110,26 @@ export default {
   }),
 
   computed: {
-    ...mapGetters(["formdataBriefcases"]),
+    ...mapGetters(["formdataSchools"]),
   },
 
   methods: {
-    ...mapActions(["updateList", "deleteListStore", "editListStore"]),
+    ...mapActions(["updateList", "deleteListStore"]),
     AddList() {
       this.textFields = cloneArrayObj(textFieldsForm);
       this.textAreaFields = cloneArrayObj(textAreaFieldsForm);
       this.dateFields = cloneArrayObj(dateFieldsForm);
       this.modal = true;
     },
-    setList(text, textArea, date) {
+    setList() {
       this.updateList({
         list: {
-          id: this.formdataBriefcases.length + 1,
-          fields: [...text, ...textArea, ...date],
+          id: this.formdataSchools.length + 1,
+          fields: [
+            ...this.textFields,
+            ...this.textAreaFields,
+            ...this.dateFields,
+          ],
         },
         id: this.idStore,
       });
@@ -139,34 +138,20 @@ export default {
 
     editOpen(item) {
       this.id = item.id;
+      this.modal = true;
       this.textFields = item.fields.filter((el) => el.type == "text");
       this.textAreaFields = item.fields.filter((el) => el.type == "textarea");
       this.dateFields = item.fields.filter((el) => el.type == "date");
-      this.modal = true;
     },
 
-    // editList(text, textArea, date) {
-    //   // this.textFields = text;
-    //   // this.textAreaFields = textArea;
-    //   // this.dateFields = date;
-    //   // this.editListStore({
-    //   //   list: {
-    //   //     id: this.formdataBriefcases.length + 1,
-    //   //     fields: [
-    //   //       ...this.textFields,
-    //   //       ...this.textAreaFields,
-    //   //       ...this.dateFields,
-    //   //     ],
-    //   //   },
-    //   //   id: this.idStore,
-    //   // });
-    //   this.closeModal();
-    // },
+    editList() {
+      this.closeModal();
+    },
 
-    // deleteList() {
-    //   this.deleteListStore({ id: this.id, idBlock: this.idStore });
-    //   this.closeModal();
-    // },
+    deleteList() {
+      this.deleteListStore({ id: this.id, idBlock: this.idStore });
+      this.closeModal();
+    },
 
     closeModal() {
       this.modal = false;

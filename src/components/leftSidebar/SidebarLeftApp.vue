@@ -463,7 +463,7 @@ export default {
     }
 
     @include sm-down {
-      width: calc(75% - 44px);
+      width: calc(85% - 44px);
     }
   }
 

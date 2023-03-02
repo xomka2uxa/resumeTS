@@ -143,12 +143,14 @@ export default new Vuex.Store({
       otherContacts: "",
     },
     formdataBriefcases: [],
+    formdataSchools: [],
   },
   getters: {
     formdataMain: (state) => state.formdataMain,
     formdataAdress: (state) => state.formdataAdress,
     formdataContacts: (state) => state.formdataContacts,
     formdataBriefcases: (state) => state.formdataBriefcases,
+    formdataSchools: (state) => state.formdataSchools,
   },
   mutations: {
     updateForm: function (state, { value, name, id }) {
@@ -160,8 +162,12 @@ export default new Vuex.Store({
     updateList: function (state, { list, id }) {
       state[id].push(list);
     },
-    deleteList: function (state, { list, idBlock }) {
-      state[idBlock] = list;
+    deleteList: function (state, { id, idBlock }) {
+      state[idBlock] = state[idBlock].filter((el: any) => el.id !== id);
+    },
+    editListStore: function (state, { list, idBlock }) {
+      const pos = state[idBlock].map((el: any) => el.id).indexOf(list.id);
+      state[idBlock].splice(pos, 1, list);
     },
   },
   actions: {
@@ -174,7 +180,10 @@ export default new Vuex.Store({
     updateList({ commit }, { list, id }) {
       commit("updateList", { list, id });
     },
-    deleteListStore({ commit }, { list, idBlock }) {
+    deleteListStore({ commit }, { id, idBlock }) {
+      commit("deleteList", { id, idBlock });
+    },
+    editListStore({ commit }, { list, idBlock }) {
       commit("deleteList", { list, idBlock });
     },
   },

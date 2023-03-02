@@ -244,6 +244,10 @@ a {
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.7);
+
+  @include sm-down {
+    font-size: 14px !important;
+  }
 }
 
 .btn-add {
@@ -251,6 +255,14 @@ a {
   border: 1px solid #efdfb7 !important;
   font-weight: 400 !important;
   font-size: 12px !important;
+
+  @include md-down {
+    width: 100%;
+  }
+
+  @include sm-down {
+    font-size: 11px !important;
+  }
 
   &.item-name {
     margin-top: 0;
@@ -268,8 +280,21 @@ a {
   }
 }
 
-.list-wrapper:last-child {
-  .btn-add.item-name {
-    margin-bottom: 0;
+// .list-wrapper:last-child {
+//   .btn-add.item-name {
+//     margin-bottom: 0;
+//   }
+// }
+
+.wrapper-icon.left-block-icon {
+  @include md-down {
+    display: none;
+  }
+}
+
+
+.v-label {
+  @include sm-down {
+    font-size: 14px !important;
   }
 }

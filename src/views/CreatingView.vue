@@ -23,11 +23,9 @@
         <div>{{ formdataContacts.links }}</div>
         <div>{{ formdataContacts.wt }}</div>
         <div>{{ formdataContacts.otherContacts }}</div>
-        <!-- <div v-if="formdataBriefcases.length">
-          <div v-for="(Briefcases, i) in formdataBriefcases" :key="i">
-            {{ Briefcases.fields[0].value }}
-          </div>
-        </div> -->
+        <div v-if="formdataBriefcases.length">
+          {{ formdataBriefcases[0].fields }}
+        </div>
       </div>
       <div class="right-sidebar">trr</div>
     </div>
@@ -69,6 +67,10 @@ export default {
       width: 30%;
       overflow: hidden;
       z-index: 2;
+
+      @include sm-down {
+        width: 25%;
+      }
     }
 
     .main {

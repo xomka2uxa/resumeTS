@@ -1,7 +1,7 @@
 <template>
   <div class="block-content" id="ls-contacts">
     <div class="block-title">
-      <icon-app :name="name" isWhite />
+      <icon-app :name="name" isWhite class="left-block-icon" />
       {{ title }}
     </div>
     <v-row>
